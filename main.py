@@ -9,7 +9,7 @@ def get_api_response(prompt: list) -> str | None:
     try:
         response: dict = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=prompt,  # Pass the conversation as 'messages'
+            messages=prompt,  
             temperature=0.9,
             max_tokens=150,
             top_p=1,
@@ -22,7 +22,6 @@ def get_api_response(prompt: list) -> str | None:
     except Exception as e:
         print('Error:', e)
 
-# Initialize the conversation with a system message
 prompt = [
     {
         "role": "system",
@@ -30,13 +29,12 @@ prompt = [
     }
 ]
 
-# Continue the conversation interactively with user input
-while True:
-    user_input = input("You: ")  # Get user input
-    prompt.append({"role": "user", "content": user_input})  # Add user message to the conversation
-    response_text = get_api_response(prompt)  # Get AI response
-    print("AI:", response_text)  # Print AI response
 
-    # Exit the loop if user enters "exit" or "quit"
+while True:
+    user_input = input("You: ") 
+    prompt.append({"role": "user", "content": user_input})
+    response_text = get_api_response(prompt)
+    print("AI:", response_text)
+
     if user_input.lower() in ["exit", "quit"]:
         break
